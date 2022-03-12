@@ -11,54 +11,47 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import ni.edu.uca.models.Genero;
-import ni.edu.uca.services.GeneroService;
+import ni.edu.uca.models.Idioma;
+import ni.edu.uca.services.IdiomaService;
 
-@RestController
-@RequestMapping(path = "/genero")
-public class GeneroController {
-	
+public class IdiomaController {
+
 	@Autowired
-	GeneroService genS;
-	
+	IdiomaService idiS;
 	
 	@RequestMapping("/listar")
-	public List<Map<String,Object>> listar(){
-		
-		return genS.MostrarRegistro();
+	public List<Map<String,Object>> listar() {
+		return idiS.MostrarRegistro();
 	}
-
+	
 	@PostMapping("/agregar")
-	public String agregarGen(@RequestBody Genero gen) {
+	public String agregarIdi(@RequestBody Idioma Idi) {
 		String msg = "Error al guardar el Registro...";
-		int b = genS.GuardarRegistro(gen);
+		int b = idiS.GuardarRegistro(Idi);
 		if(b == 1) msg ="Registro Guardado Correctamente..." ;
 		return msg;
 	}
 	
 	@PutMapping("/editar/{id}")
-	public String EditarGen(@RequestBody Genero gen, @PathVariable int id, Model model) {
+	public String editarIdi(@RequestBody Idioma Idi,@PathVariable int id,Model model) {
+		
 		String msg = "Error al guardar el Registro...";
-		gen.setIdGenero(id);
-		int b = genS.EditarRegistro(gen);
+		Idi.setIdIdioma(id);
+		int b = idiS.EditarRegistro(Idi);
 		if(b == 1) msg = "Cambios Realizados Correctamente";
 		return msg;
-		
-		
 	}
 	
 	@DeleteMapping("/eliminar/{id}")
-	public String BorrarGen(@PathVariable int id, Model model) {
+	public String eliminarIdi(@PathVariable int id, Model model) {
 		
 		String msg = "Error al guardar el Registro...";
-		int b = genS.EliminarRegistro(id);
+		int b = idiS.EliminarRegistro(id);
 		if(b == 1) msg = "Registro Eliminado Correctamente";
 		return msg;
-		
-		
 	}
+	
 	
 	
 }
