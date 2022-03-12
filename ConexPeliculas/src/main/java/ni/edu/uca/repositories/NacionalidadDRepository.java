@@ -25,7 +25,8 @@ public class NacionalidadDRepository implements NacionalidadIRepository {
 		int b = 0;
 		b = template.update("Insert into Nacionalidad(nombre,activo) values (?, ?)", 
 				new Object[] {n.getNombre(), n.isActivo()});
-		return b;	}
+		return b;	
+		}
 
 	@Override
 	public int EditarRegistro(Nacionalidad n) {
